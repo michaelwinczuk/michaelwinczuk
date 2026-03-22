@@ -76,3 +76,4 @@ I'm building the infrastructure that makes autonomous agents trustworthy enough 
 Open to roles in agentic AI infrastructure, distributed systems, Rust engineering, or post-quantum security.
 
 [GitHub](https://github.com/michaelwinczuk) --- [@smartcontr67332](https://x.com/smartcontr67332)
+
