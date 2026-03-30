@@ -1,59 +1,58 @@
 ## Michael Winczuk
 
-**Retired Marine | Rust Principal Engineer | AI Swarm Architect**
+**Retired U.S. Marine MSgt | Agentic AI Engineer | Rust + Python**
 
-20 years of service taught me one thing: complex systems succeed or fail based on their ability to self-correct under pressure. I build AI agent infrastructure that does exactly that.
-
----
-
-### Latest: OpenAI Parameter Golf — Beat the SOTA
-
-My think tank swarm discovered that changing one hyperparameter (`LeakyReLU negative_slope=0.5` → `0.75`) improves the SOTA by **0.008 BPB**. Nobody in the competition's 50+ submissions had swept this parameter.
-
-**Result: 1.1185 BPB mean across 3 seeds** (vs SOTA 1.1194). [Submission PR #977](https://github.com/openai/parameter-golf/pull/977).
-
-How it was found: 8 specialist AI agents traversing competition-specific knowledge graphs (264 nodes, 122 typed edges), validated by Grok, Claude Opus, and Gemini. The Visionary agent flagged the opportunity. I designed the system, directed the research, and ran the experiments.
+I build multi-agent AI systems with safety guarantees. 20 years of military service taught me that complex systems succeed or fail based on their ability to self-correct under pressure. I apply that to AI agent infrastructure — consensus, verification, audit trails, self-healing.
 
 ---
+
+### Shipped Work
+
+**[Bastion](https://github.com/michaelwinczuk/bastion)** — Safety kernel for agentic AI. Multi-model consensus gating, deterministic verification (no LLM calls on the critical path), SHA-256 hash-chained audit trails, checkpoint/rollback, self-healing decision trees. Rust + Tokio.
+[![CI](https://github.com/michaelwinczuk/bastion/actions/workflows/ci.yml/badge.svg)](https://github.com/michaelwinczuk/bastion/actions/workflows/ci.yml)
+
+**[Prism](https://github.com/michaelwinczuk/prism)** — Reliability primitives for multi-agent systems. VotingMesh consensus (215K ops/sec with 3 agents), Sentinel safety pipeline, Aegis exchange compliance (wash trading/spoofing detection), checkpoint/replay with divergence detection. Rust + Tokio + Python bindings via PyO3. 95 tests.
+[![CI](https://github.com/michaelwinczuk/prism/actions/workflows/ci.yml/badge.svg)](https://github.com/michaelwinczuk/prism/actions/workflows/ci.yml)
+
+**[Parameter Golf — SOTA](https://github.com/michaelwinczuk/parameter-golf)** — Beat the OpenAI Parameter Golf leaderboard. 3-seed mean **0.3958 BPB** (std 0.0011), improving on prior best of 0.4416 by 0.0458. Causal BackoffNgramMixer architecture. [PR #1094](https://github.com/KellerJordan/modded-nanogpt/pull/1094).
 
 ### What I Build
 
-**[Bastion](https://github.com/michaelwinczuk/bastion)** — Open-source production kernel for agentic AI. Multi-model consensus, self-healing pipelines, deterministic checkpoints, immutable audit trails.
-
-**[Prism](https://github.com/michaelwinczuk/prism)** — Production reliability layer. VotingMesh consensus, checkpoint recovery, CodeForge generation. Native Rust + Tokio core with Python bindings via PyO3.
-
-**The Think Tank Swarm** — Multi-agent research system with 8 specialist personalities, adversarial Alpha/Omega deliberation, 145K+ node knowledge graphs, ontological inference, and live research claws. Zero API calls in experimental mode.
-
-### The Swarm Architecture
+I design multi-agent architectures where agents can't act without passing through a safety pipeline:
 
 ```
-Messenger decomposes the mission into objectives
-     |
-Environment maps the landscape
-     |
-8 Edge-Type Specialists (causes, solves, contradicts, tradeoff, systems, visionary...)
-     |
-Mission-specific knowledge graphs (isolated from 500K+ general nodes)
-     |
-Ontological Reasoner (transitive relationship discovery)
-     |
-Synthesis + Benchmark scoring
+Action proposed
+    |
+Guardrails (spending limits, dangerous patterns, human-in-loop)
+    |
+Multi-model consensus (N agents must agree)
+    |
+Checkpoint state
+    |
+Execute
+    |
+Deterministic verification (hallucination detection, confidence checks)
+    |
+Pass: commit  |  Fail: rollback + self-heal
+    |
+SHA-256 hash-chained audit trail
 ```
 
-Every agent has a machine-readable cartridge (JSON-LD), gets benchmarked after every mission, and has a dedicated Mechanic that adjusts parameters based on performance.
+All safety checks are deterministic — sub-millisecond overhead, zero LLM calls in the critical path.
 
-### Tech Stack
+### Tech
 
 ```
-Languages:    Rust, TypeScript, Python
-Runtime:      Tokio (async), native binaries — no containers
-AI Routing:   Claude Sonnet/Opus, GPT-4o (API-only)
-Data:         JSON-LD knowledge graphs, BM25 search, binary mmap graphs
-Infra:        PostgreSQL, Redis, RabbitMQ, Railway
+Languages:    Rust, Python, TypeScript
+Safety:       Consensus gating, checkpoint/rollback, hash-chained audit, self-healing
+Runtime:      Tokio async, PyO3 bindings, native binaries
+AI:           Claude, GPT-4o, Phi-3 (local inference)
+Data:         Knowledge graphs (330K nodes), BM25 search, mmap binary graphs
+Infra:        PostgreSQL, Redis, GitHub Actions CI
 ```
 
 ### Contact
 
-Open to roles in agentic AI infrastructure, distributed systems, Rust engineering, or AI efficiency research.
+Open to remote roles in agentic AI, multi-agent systems, AI safety/reliability, or Rust + Python engineering.
 
 [GitHub](https://github.com/michaelwinczuk) · [@smartcontr67332](https://x.com/smartcontr67332)
